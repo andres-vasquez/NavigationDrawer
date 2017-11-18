@@ -15,10 +15,10 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.mikepenz.iconics.typeface.FontAwesome;
+import com.mikepenz.materialdrawer.AccountHeader;
+import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
-import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
-import com.mikepenz.materialdrawer.accountswitcher.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
@@ -60,13 +60,15 @@ public class MainActivity extends AppCompatActivity {
         contenedor=(FrameLayout)findViewById(R.id.contenedor);
 
         //Definimos el header
+
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.header)
                 .addProfiles(
                         new ProfileDrawerItem().
                                 withName("Mi usuario").
-                                withEmail("usuario@email.com")
+                                withEmail("usuario@email.com").
+                                withIcon("https://firebasestorage.googleapis.com/v0/b/clasetekhne.appspot.com/o/nilton%2F1510968111865_trueno.jpg?alt=media&token=32ce89ac-9d67-4126-be81-cd9df7e71c97")
                 )
                 .build();
 
@@ -111,14 +113,13 @@ public class MainActivity extends AppCompatActivity {
                                 .withIconColor(getResources().getColor(R.color.primary))
                                 .withSelectedTextColor(getResources().getColor(R.color.colorAccent))
                                 .withSelectedIconColor(getResources().getColor(R.color.colorAccent))
-                                .withCheckable(false)
                 )
                 //Accion Click sobre los items de menu
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener()
                 {
                     @Override
-                    public boolean onItemClick(AdapterView<?> adapterView, View view, int i, long l, IDrawerItem drawerItem) {
-                        seleccionartItem(drawerItem.getIdentifier());
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        seleccionartItem(position);
                         return false;
                     }
                 })
