@@ -1,6 +1,8 @@
 package com.example.android_instructor.navigationdrawer;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -14,11 +16,12 @@ import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.iconics.typeface.FontAwesome;
-import com.mikepenz.materialdrawer.AccountHeader;
-import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
+import com.mikepenz.materialdrawer.accountswitcher.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
@@ -61,6 +64,11 @@ public class MainActivity extends AppCompatActivity {
 
         //Definimos el header
 
+        Drawable icon = new IconicsDrawable(this)
+                .icon(FontAwesome.Icon.faw_ambulance)
+                .color(Color.RED)
+                .sizeDp(24);
+
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.header)
@@ -68,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                         new ProfileDrawerItem().
                                 withName("Mi usuario").
                                 withEmail("usuario@email.com").
-                                withIcon("https://firebasestorage.googleapis.com/v0/b/clasetekhne.appspot.com/o/nilton%2F1510968111865_trueno.jpg?alt=media&token=32ce89ac-9d67-4126-be81-cd9df7e71c97")
+                                withIcon(icon)
                 )
                 .build();
 
@@ -113,13 +121,14 @@ public class MainActivity extends AppCompatActivity {
                                 .withIconColor(getResources().getColor(R.color.primary))
                                 .withSelectedTextColor(getResources().getColor(R.color.colorAccent))
                                 .withSelectedIconColor(getResources().getColor(R.color.colorAccent))
+                                .withCheckable(false)
                 )
                 //Accion Click sobre los items de menu
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener()
                 {
                     @Override
-                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        seleccionartItem(position);
+                    public boolean onItemClick(AdapterView<?> adapterView, View view, int i, long l, IDrawerItem drawerItem) {
+                        seleccionartItem(drawerItem.getIdentifier());
                         return false;
                     }
                 })

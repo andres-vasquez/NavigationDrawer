@@ -10,7 +10,6 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -26,13 +25,12 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    compile 'com.android.support:multidex:1.0.1'
     //Iconos
     //Paso 1: Agragar las librerias
     compile('com.mikepenz:aboutlibraries:5.0.6@aar') {
         transitive = true
     }
-    compile('com.mikepenz:materialdrawer:5.3.6@aar') {
+    compile('com.mikepenz:materialdrawer:3.0.9@aar') {
         transitive = true
     }
     compile 'com.android.support:appcompat-v7:26.+'
